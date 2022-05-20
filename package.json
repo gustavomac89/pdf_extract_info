@@ -16,5 +16,10 @@
   "bugs": {
     "url": "https://github.com/gustavomac89/pdf_extract_info/issues"
   },
-  "homepage": "https://github.com/gustavomac89/pdf_extract_info#readme"
+  "homepage": "https://github.com/gustavomac89/pdf_extract_info#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "config": "^3.2.3",
+    "express": "^4.17.1"
+  }
 }
