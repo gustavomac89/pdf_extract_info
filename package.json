@@ -4,6 +4,7 @@
   "description": "A project code with node for searching informations in a PDF file.",
   "main": "index.js",
   "scripts": {
+    "start": "nodemon server",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
