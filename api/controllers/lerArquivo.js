@@ -4,26 +4,28 @@ module.exports = () => {
     const fs = require('fs');
     const pdf = require('pdf-parse');
 
-    let dataBuffer = fs.readFileSync('./input1.txt',{encoding:'utf8', flag:'r'});
-    let antes = "GFIP";
-    let depois = "8.40"
-    pdf(dataBuffer).then(function(data) {
-      encontraString(antes, depois, data);
-    });
-
     encontraString = (antes, depois, texto) => {
-          if (data.text.includes(antes) && data.text.includes(depois)) {
-              let pos = data.text.lastIndexOf(palavra) + palavra.length;
-              let comp = data.text.substring(pos, pos  + 8) ;
-              console.log(comp); 
-        
-};
+          if (texto.includes(antes) && texto.includes(depois)) {
+              let posAntes = texto.lastIndexOf(antes) + antes.length;
+              let posDepois = texto.lastIndexOf(depois);
+              let encontrado = texto.substring(posAntes, posDepois);
+              return encontrado;
+          };
     }
   
-    controller.lerArquivo = (req, res) => res.status(201).json(
-      {"resp":"teste"}
-    
-      );  
-
+    controller.lerArquivo = (req, res) => {
+      //let antes = "REMUNERAÇÃO";
+      let antes = req.body.antes;
+      //let depois = "10-INSCRIÇÃO/TIPO";
+      let depois = req.body.depois;
+      console.log(antes);
+      console.log(depois);
+      let dataBuffer = fs.readFileSync('api/FGTS.PDF');
+      pdf(dataBuffer).then(function(data) {
+        let texto = data.text;
+        let string = encontraString(antes,depois,texto);
+        res.status(201).json({"string": string});  
+      });
+      }
     return controller;
   }
