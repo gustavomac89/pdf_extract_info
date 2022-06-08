@@ -18,10 +18,10 @@ module.exports = () => {
       let antes = req.body.antes;
       //let depois = "10-INSCRIÇÃO/TIPO";
       let depois = req.body.depois;
-      console.log(antes);
-      console.log(depois);
-      let dataBuffer = fs.readFileSync('api/FGTS.PDF');
+      console.log(req.file);
+      let dataBuffer = fs.readFileSync(req.file.path);
       pdf(dataBuffer).then(function(data) {
+        console.log('entrou');
         let texto = data.text;
         let string = encontraString(antes,depois,texto);
         res.status(201).json({"string": string});  
